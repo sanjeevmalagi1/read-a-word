@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Lexend+Deca&display=swap" rel="stylesheet" />
+  <style>
     html {
       font-family: 'Lexend Deca', sans-serif;
+      background: black;
     }
     #main-word {
         text-transform: uppercase;
@@ -14,10 +16,109 @@
     .heighlight {
       background-color: yellow;
     }
+
+    .player {
+      width: 100%;
+      height: 500px;
+      background: black;
+      position: relative;
+      text-align: center;
+    }
+
+    .player-layover {
+      position: absolute;
+      bottom: 0;
+      background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+      width: 100%;
+      height: 50%;
+    }
+
+    .hover-menu {
+      position: absolute;
+      bottom: 0;
+      width: calc(100% - 20px);
+      left: 10px;
+      height: 36px;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 2;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      background: red;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      background: red;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .filler {
+      position: absolute;
+      top: 0;
+      width: 26%;
+      height: 3px;
+      background: red;
+      margin: 2px;
+      margin-right: 0px;
+      z-index: 1;
+    }
+
+    .controls {
+      height: calc(100% - 4px);
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .menu-left {
+      float: left;
+      height: 100%;
+      bottom: 0;
+    }
+
+    .menu-right {
+      float: right;
+      height: 100%;
+      bottom: 0;
+    }
+
+    .menu-icon {
+      padding: 0 10px;
+      color: rgba(255, 255, 255, .9);
+      cursor: pointer;
+    }
+
+    .menu-icon:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .img-responsive {
+      max-width:100%;
+      max-height:100%;
+    }
     </style>
 </head>
 <body>
-    <div id="create-article-form">
+    <div id="app">
         <!-- form -->
     </div>
 <script type="text/javascript" src="main.js"></script></body>
