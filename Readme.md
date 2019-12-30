@@ -1,5 +1,5 @@
 # Read-Assistant
 
-This is a hobby project I am developing to display each word of a given sentence to increase the efficiency of reading. Available on [https://sanjeevmalagi1.github.io/read-assistant/](https://sanjeevmalagi1.github.io/read-assistant/).
+This is a hobby project I am developing to display each word of a given sentence to increase the efficiency of reading.
 
-Further development is underway.
+Available on [https://sanjeevmalagi1.github.io/read-assistant/](https://sanjeevmalagi1.github.io/read-assistant/).
