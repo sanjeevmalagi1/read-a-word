@@ -116,6 +116,10 @@ const playerMachine = Machine({
           [events.RESTART]: {
             target: states.IDLE,
           },
+          [events.SCROLL_BACK]: {
+            target: states.PLAYING,
+            actions: ['scrollToWord'],
+          },
         }
       }
     }
