@@ -16,17 +16,17 @@ const StateWordPlayer = props => {
 
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: sentence.split(" "),
-      speed: 0.1,
+      speed: 0.5,
       currentWord: null,
       index: 0,
   });
 
   const [ current, send ] = useMachine(dynamicPlayerStateMachine);
   const { speed, word, index, words } = current.context
-
   const numberOfWords = words.length;
+  const currentState = current.value;
 
-  const isPlaying = [states.PLAYING].includes(current.value);
+  const isPlaying = current.matches(states.PLAYING);
 
   useEffect(() => {
     if(isPlaying) {
@@ -35,27 +35,23 @@ const StateWordPlayer = props => {
         send(events.SHOW_WORD);
       }, (1 - speed) * 1000 );
     }
-  }, [speed, current.value]);
+  }, [speed, currentState]);
 
   useEffect(() => {
     if(interval && !isPlaying) {
       clearInterval(interval);
     }
-  }, [current.value]);
+  }, [currentState]);
 
-  const showPaused = isPlaying;
-  const showPlay = [states.PAUSED, states.IDLE].includes(current.value);
-  const showReplay = ![states.IDLE].includes(current.value);
-  
   const percentage =  (index / numberOfWords ) * 100;
 
   return (
    <Player
       speed={speed}
       completedPercentage={ percentage }
-      showPlaying={showPlay}
-      showPaused={showPaused}
-      showReplay={showReplay}
+      showPlaying={current.nextEvents.includes(events.PLAY)}
+      showPaused={current.nextEvents.includes(events.PAUSE)}
+      showReplay={current.nextEvents.includes(events.RESTART)}
       onPlay={() => send(events.PLAY) }
       onReplay={() => send(events.RESTART) }
       onPause={() => send(events.PAUSE) }

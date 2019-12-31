@@ -32,10 +32,6 @@ const Player = (props) => {
               <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range">
               </input>
             </div>
-            <div className="menu-right">
-              <i className="menu-icon material-icons">crop_7_5</i>
-              <i className="menu-icon material-icons">fullscreen</i>
-            </div>
           </div>
         </div>
       </div>

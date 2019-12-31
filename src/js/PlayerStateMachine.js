@@ -16,8 +16,19 @@ const states = {
   FINISHED: 'finished',
 };
 
+const actionNames = {
+  CLEAR_PREV_DATA: "clearPrevData",
+  SHOW_WORD: "showWord",
+  CHANGE_SPEED: "changeSpeed",
+  SCROLL_TO_WORD: "scrollToWord",
+};
+
+const guardNames = {
+  HAS_FINISHED: "hasFinished"
+};
+
 const guards = {
-  hasFinished:  (context, event) => {
+  [guardNames.HAS_FINISHED]:  (context, event) => {
     const {
       index,
       words,
@@ -28,13 +39,13 @@ const guards = {
 };
 
 const actions = {
-  clearPrevData: assign(() => {
+  [actionNames.CLEAR_PREV_DATA]: assign(() => {
     return {
       word: null,
       index: 0
     }
   }),
-  showWord: assign((context, __event) => {
+  [actionNames.SHOW_WORD]: assign((context, __event) => {
     const {
       words,
       index
@@ -45,12 +56,12 @@ const actions = {
       index: index+1
     }
   }),
-  changeSpeed: assign((__context, event) => {
+  [actionNames.CHANGE_SPEED]: assign((__context, event) => {
     return {
       speed: event.value,
     }
   }),
-  scrollToWord: assign((context, event) => {
+  [actionNames.SCROLL_TO_WORD]: assign((context, event) => {
     const {
       words,
     } = context;
@@ -68,7 +79,7 @@ const actions = {
 
 const playerMachine = Machine({
     id: 'player-machine',
-    initial: 'idle',
+    initial: states.IDLE,
     context: {
       speed: 0.5,
       currentWord: null,
@@ -76,15 +87,15 @@ const playerMachine = Machine({
     },
     on: {
       [events.CHANGE_SPEED]: {
-        actions: ['changeSpeed'],
+        actions: [actionNames.CHANGE_SPEED],
       },
       [events.SCROLL_BACK]: {
-        actions: ['scrollToWord'],
+        actions: [actionNames.SCROLL_TO_WORD],
       },
     },
     states: {
       [states.IDLE]: {
-        entry: ['clearPrevData'],
+        entry: [actionNames.CLEAR_PREV_DATA],
         on: {
           [events.PLAY]: states.PLAYING,
         }
@@ -95,12 +106,12 @@ const playerMachine = Machine({
           [events.RESTART]: states.IDLE,
           [events.SHOW_WORD]: [
             {
-              cond: { type: 'hasFinished' } ,
-              target: 'finished',
+              cond: { type: [guardNames.HAS_FINISHED] } ,
+              target: states.FINISHED,
             },
             {
               target: states.PLAYING,
-              actions: [ 'showWord' ]
+              actions: [ actionNames.SHOW_WORD ]
             }
           ]
         }
@@ -118,7 +129,7 @@ const playerMachine = Machine({
           },
           [events.SCROLL_BACK]: {
             target: states.PLAYING,
-            actions: ['scrollToWord'],
+            actions: [actionNames.SCROLL_TO_WORD],
           },
         }
       }
