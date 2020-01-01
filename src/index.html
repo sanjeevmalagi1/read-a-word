@@ -8,18 +8,80 @@
     html {
       font-family: 'Lexend Deca', sans-serif;
       background: black;
+      color: white;
+      padding: 0px;
+      margin: 0px;
     }
+
+    body {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .navigation {
+      display: flex;
+      height: 7vh;
+      border-bottom: 1px solid white;
+      align-items: center;
+    }
+
+    .navigation .navbar-back {
+      flex: 0;
+      background: inherit;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+
+    .navigation .navbar-logo {
+      text-align: center;
+      flex: auto;
+    }
+
+    .paste-screen {
+      display: flex;
+      text-align: center;
+      font-size: 3rem;
+      height: 93vh;
+    }
+
+    .paste-screen-content {
+      margin: auto;
+    }
+  
+    .paste-button {
+      border-radius: 50px;
+      border: 1px solid white;
+      background: black;
+      color: white;
+    }
+
+    .paste-button i {
+      padding: 10px 30px;
+    }
+
+    .paste-button:hover {
+      cursor: pointer;
+      background: white;
+      color: black;
+    }
+
+    .paste-button:hover i {
+      color: black; 
+    }
+
     #main-word {
         text-transform: uppercase;
         font-family: 'Lexend Deca', sans-serif;
     }
+
     .heighlight {
       background-color: yellow;
     }
 
     .player {
       width: 100%;
-      height: 500px;
+      height: 90vh;
       background: black;
       position: relative;
       text-align: center;
@@ -36,9 +98,9 @@
     .hover-menu {
       position: absolute;
       bottom: 0;
-      width: calc(100% - 20px);
-      left: 10px;
-      height: 36px;
+      width: calc(100% - 30px);
+      left: 15px;
+      height: 75px;
     }
 
     .slider {
@@ -89,26 +151,16 @@
       bottom: 0;
     }
 
-    .menu-left {
-      float: left;
-      height: 100%;
-      bottom: 0;
-    }
-
-    .menu-right {
-      float: right;
-      height: 100%;
-      bottom: 0;
-    }
-
     .menu-icon {
-      padding: 0 10px;
+      padding: 15px;
       color: rgba(255, 255, 255, .9);
       cursor: pointer;
+      transition: .3s;
     }
 
     .menu-icon:hover {
       color: rgba(255, 255, 255, 1);
+      background: rgba(255,255,255,0.1);
     }
 
     .img-responsive {

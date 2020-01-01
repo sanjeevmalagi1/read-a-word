@@ -1,35 +1,73 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import StateWordPlayer from '../presentational/StateWordPlayer.jsx';
 
 const PlayerContainer = () => {
+
+  const [step, setStep] = useState("paste");
+  const [text, setText] = useState("The Sample Text is here");
+
+  const handlePaste = async() => {
+    const text = await navigator.clipboard.readText();
+    setText(text);
+    setStep('reader');
+  };
+  
+  const page = () => {
+    switch(step) {
+      case 'paste': {
+        
+        return (
+          <Fragment>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Read Assistant (paste your text)</title>
+            </Helmet>
+            <div className='paste-screen'>
+              <div className='paste-screen-content'>
+                <div>Use text from your clipboard</div>
+                <button className='paste-button' onClick={ () => handlePaste() }>
+                  <i className="material-icons">assignment</i>
+                </button>
+              </div>
+            </div>
+          </Fragment>
+        );
+      }
+      case 'reader': {
+
+        return (
+          <Fragment>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Read Assistant</title>
+            </Helmet>
+            <StateWordPlayer
+              sentence={text}
+            />
+          </Fragment>
+        );
+      }
+    }
+  }
+
   return (
     <Fragment>
-      <Helmet>
-          <meta charSet="utf-8" />
-          <title>Reading Assistant</title>
-      </Helmet>
-      <StateWordPlayer
-        sentence="Call me Ishmael. Some years ago—never mind how long precisely—having
-          little or no money in my purse, and nothing particular to interest me
-          on shore, I thought I would sail about a little and see the watery part
-          of the world. It is a way I have of driving off the spleen and
-          regulating the circulation. Whenever I find myself growing grim about
-          the mouth; whenever it is a damp, drizzly November in my soul; whenever
-          I find myself involuntarily pausing before coffin warehouses, and
-          bringing up the rear of every funeral I meet; and especially whenever
-          my hypos get such an upper hand of me, that it requires a strong moral
-          principle to prevent me from deliberately stepping into the street, and
-          methodically knocking people’s hats off—then, I account it high time to
-          get to sea as soon as I can. This is my substitute for pistol and ball.
-          With a philosophical flourish Cato throws himself upon his sword; I
-          quietly take to the ship. There is nothing surprising in this. If they
-          but knew it, almost all men in their degree, some time or other,
-          cherish very nearly the same feelings towards the ocean with me."
-      />
-    </Fragment>
-  );
+      <nav className='navigation'>
+        {
+          step == 'reader' && (
+            <button className='navbar-back' onClick={() => setStep("paste") }>
+            <i className="material-icons">navigate_before</i>
+          </button>
+          )
+        }
+        <div className='navbar-logo'>READ ASSISTANT</div>
+      </nav>
+      { page() }
+    </Fragment> 
+  )
+  
 }
 
 export default PlayerContainer;

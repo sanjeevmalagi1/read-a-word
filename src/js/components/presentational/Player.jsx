@@ -16,14 +16,16 @@ const Player = (props) => {
     onScroll,
     onSpeedScroll,
   } = props;
+
+  const displayPercentage = completedPercentage.toFixed(4);
   return (
     <div id="player" className="player">
       {children}
       <div id="player-layover" className="player-layover">
         <div className="hover-menu">
-          <input value={completedPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider">
+          <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider">
           </input>
-          <div className='filler' style={{ width: `${completedPercentage}%` }}></div>
+          <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
           <div className="controls">
             <div className="menu-left">
               { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }

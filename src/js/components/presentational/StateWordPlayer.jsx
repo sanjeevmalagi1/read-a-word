@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Machine, assign } from 'xstate';
 import { useMachine } from '@xstate/react';
 
 import Player from './Player.jsx';
