@@ -43,7 +43,13 @@ module.exports = {
       short_name: 'Read-Assistant',
       description: 'Improve you reading one word at a time!',
       background_color: '#000000',
-      theme_color: '#000000'
+      theme_color: '#000000',
+      icons: [
+        {
+          src: path.resolve('src/icon.png'),
+          size: '72x72',
+        }
+      ],
     })
   ]
 };

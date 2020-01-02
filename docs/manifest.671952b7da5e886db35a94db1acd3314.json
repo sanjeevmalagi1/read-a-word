@@ -1,4 +1,11 @@
 {
+  "icons": [
+    {
+      "src": "icon_72x72.d220df06b3bc7729bf87701f3b393b13.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    }
+  ],
   "name": "Read Assistant",
   "short_name": "Read-Assistant",
   "orientation": "portrait",
