@@ -40,10 +40,10 @@ module.exports = {
     }),
     new WebpackPwaManifest({
       name: 'Read Assistant',
-      short_name: 'RAS',
+      short_name: 'Read-Assistant',
       description: 'Improve you reading one word at a time!',
       background_color: '#000000',
-      theme_color: '#FFF'
+      theme_color: '#000000'
     })
   ]
 };
