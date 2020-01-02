@@ -1,4 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -31,9 +33,17 @@ module.exports = {
     path: path.resolve(__dirname, 'docs')
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
+    }),
+    new WebpackPwaManifest({
+      name: 'Read Assistant',
+      short_name: 'RAS',
+      description: 'Improve you reading one word at a time!',
+      background_color: '#000000',
+      theme_color: '#FFF'
     })
   ]
 };
