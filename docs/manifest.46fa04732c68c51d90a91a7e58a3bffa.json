@@ -1,17 +1,17 @@
 {
   "icons": [
     {
-      "src": "icon_72x72.d220df06b3bc7729bf87701f3b393b13.png",
-      "sizes": "72x72",
+      "src": "icon_512x512.eaea823245b38591370ca7debe8a7b67.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "name": "Read Assistant",
-  "short_name": "Read-Assistant",
+  "short_name": "Read Assistant",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": ".",
-  "description": "Improve you reading one word at a time!",
+  "description": "Improve your reading one word at a time!",
   "background_color": "#000000",
   "theme_color": "#000000"
 }

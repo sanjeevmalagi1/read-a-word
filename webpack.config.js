@@ -40,14 +40,14 @@ module.exports = {
     }),
     new WebpackPwaManifest({
       name: 'Read Assistant',
-      short_name: 'Read-Assistant',
-      description: 'Improve you reading one word at a time!',
+      short_name: 'Read Assistant',
+      description: 'Improve your reading one word at a time!',
       background_color: '#000000',
       theme_color: '#000000',
       icons: [
         {
-          src: path.resolve('src/icon.png'),
-          size: '72x72',
+          src: path.resolve('src/icon_high_res.png'),
+          size: '512x512',
         }
       ],
     })
