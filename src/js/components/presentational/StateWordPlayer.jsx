@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useMachine } from '@xstate/react';
 
@@ -15,7 +15,7 @@ const StateWordPlayer = props => {
 
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: sentence.split(" "),
-      speed: 0.5,
+      speed: Number(localStorage.getItem('speed')) || 0.5,
       currentWord: null,
       index: 0,
   });
@@ -26,6 +26,8 @@ const StateWordPlayer = props => {
   const currentState = current.value;
 
   const isPlaying = current.matches(states.PLAYING);
+
+  const didMountRef = useRef(false);
 
   useEffect(() => {
     if(isPlaying) {
@@ -41,6 +43,14 @@ const StateWordPlayer = props => {
       clearInterval(interval);
     }
   }, [currentState]);
+
+  useEffect(() => {
+    if (didMountRef.current)
+      localStorage.setItem('speed', speed)
+    else
+      didMountRef.current = true;
+
+  }, [speed]);
 
   const percentage =  (index / numberOfWords ) * 100;
 
