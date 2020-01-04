@@ -22,7 +22,7 @@ const PlayerContainer = () => {
           <Fragment>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Read Assistant (paste your text)</title>
+                <title>Read Assistant</title>
             </Helmet>
             <div className='paste-screen'>
               <div className='paste-screen-content'>
@@ -41,7 +41,7 @@ const PlayerContainer = () => {
           <Fragment>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Read Assistant</title>
+                <title>Read Assistant - Reader</title>
             </Helmet>
             <StateWordPlayer
               sentence={text}
@@ -55,14 +55,13 @@ const PlayerContainer = () => {
   return (
     <Fragment>
       <nav className='navigation'>
-        {
-          step == 'reader' && (
-            <button className='navbar-back' onClick={() => setStep("paste") }>
+        <div className='side-menu left-menu'>
+          <button data-screen={step} className='navbar-back' onClick={() => setStep("paste") }>
             <i className="material-icons">navigate_before</i>
           </button>
-          )
-        }
+        </div>
         <div className='navbar-logo'>READ ASSISTANT</div>
+        <div className='side-menu right-menu' />
       </nav>
       { page() }
     </Fragment> 

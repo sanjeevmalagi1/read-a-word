@@ -28,12 +28,19 @@
       align-items: center;
     }
 
+    .navigation .side-menu {
+      flex: 1;
+    }
+
     .navigation .navbar-back {
-      flex: 0;
       background: inherit;
       border: none;
       cursor: pointer;
       color: white;
+    }
+
+    .navigation .navbar-back[data-screen="paste"] {
+      visibility: hidden;
     }
 
     .navigation .navbar-logo {
