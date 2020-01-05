@@ -103,6 +103,7 @@
       padding: 15px;
       overflow-y: scroll;
       text-align: initial;
+      scroll-behavior: smooth;
     }
 
     .preview-paragraph .highlight {
@@ -185,6 +186,11 @@
     .menu-icon {
       padding: 15px;
       transition: .3s;
+    }
+
+    .menu-icon[data-active="true"] {
+      color: rgba(255, 255, 255, 1);
+      background: rgba(255,255,255,0.3);
     }
 
   </style>

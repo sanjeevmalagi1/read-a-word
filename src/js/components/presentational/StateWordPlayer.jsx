@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useMachine } from '@xstate/react';
 
@@ -13,12 +13,16 @@ const StateWordPlayer = props => {
     sentence,
   } = props;
 
+  let highlight = null;
+
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: sentence.split(" "),
       speed: Number(localStorage.getItem('speed')) || 0.5,
       currentWord: null,
       index: 0,
   });
+
+  const [ scrollFollow, setScrollFollow ] = useState(true);
 
   const [ current, send ] = useMachine(dynamicPlayerStateMachine);
   const { speed, index, words } = current.context
@@ -50,8 +54,21 @@ const StateWordPlayer = props => {
       localStorage.setItem('speed', speed)
     else
       didMountRef.current = true;
-
   }, [speed]);
+
+  useEffect(() => {
+    if(!highlight || !scrollFollow) {
+      return;
+    }
+    if(highlight.scrollIntoViewIfNeeded) {
+      highlight.scrollIntoViewIfNeeded(true);
+      return;
+    }
+    if(highlight.scrollIntoView) {
+      highlight.scrollIntoView();
+      return;
+    }
+  }, [index])
 
   const percentage =  ((index+1) / numberOfWords ) * 100;
 
@@ -62,11 +79,13 @@ const StateWordPlayer = props => {
       showPlaying={current.nextEvents.includes(events.PLAY)}
       showPaused={current.nextEvents.includes(events.PAUSE)}
       showReplay={current.nextEvents.includes(events.RESTART)}
+      scrollFollow={ scrollFollow }
       onPlay={() => send(events.PLAY) }
       onReplay={() => send(events.RESTART) }
       onPause={() => send(events.PAUSE) }
       onScroll={value => send(events.SCROLL_BACK, { value: value-1 }) }
       onSpeedScroll={ value => send(events.CHANGE_SPEED, { value }) }
+      onScrollFollow={() => setScrollFollow(!scrollFollow) }
     >
       <svg width="100%" height="50%">
         <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
@@ -76,7 +95,7 @@ const StateWordPlayer = props => {
           words.map((word, sentenceIndex) => {
             const displayWord = `${word} `
             if(sentenceIndex == index) {
-              return <span className='highlight'>{ displayWord }</span>
+              return <span className='highlight' ref={ item => highlight = item } >{ displayWord }</span>
             }
             return displayWord;
           })

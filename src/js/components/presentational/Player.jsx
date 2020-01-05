@@ -10,11 +10,13 @@ const Player = (props) => {
     showPlaying,
     showPaused,
     showReplay,
+    scrollFollow,
     onPlay,
     onReplay,
     onPause,
     onScroll,
     onSpeedScroll,
+    onScrollFollow,
   } = props;
 
   const displayPercentage = completedPercentage.toFixed(4);
@@ -26,6 +28,9 @@ const Player = (props) => {
         </input>
         <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
         <div className="controls">
+          <div className='menu-item'>
+            <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
+          </div>
           <div className='menu-item'>
             { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
           </div>
