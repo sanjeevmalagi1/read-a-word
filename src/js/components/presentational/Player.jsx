@@ -21,23 +21,26 @@ const Player = (props) => {
   return (
     <div id="player" className="player">
       {children}
-      <div id="player-layover" className="player-layover">
-        <div className="hover-menu">
-          <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider">
-          </input>
-          <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
-          <div className="controls">
-            <div className="menu-left">
-              { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
-              { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
-              { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
-              <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range">
-              </input>
-            </div>
+      <div className="bottom-menu">
+        <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider">
+        </input>
+        <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
+        <div className="controls">
+          <div className='menu-item'>
+            { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
+          </div>
+          <div className='menu-item'>
+            { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
+          </div>
+          <div className='menu-item'>
+            { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
+          </div>
+          <div className='menu-item'>
+            <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range" className='speed-slider'>
+            </input>
           </div>
         </div>
-      </div>
-      
+      </div>      
     </div>
   );
 }

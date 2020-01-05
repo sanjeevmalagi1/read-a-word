@@ -67,9 +67,12 @@ const StateWordPlayer = props => {
       onScroll={value => send(events.SCROLL_BACK, { value }) }
       onSpeedScroll={ value => send(events.CHANGE_SPEED, { value }) }
     >
-      <svg width="100%" height="100%">
+      <svg width="100%" height="50%">
         <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
       </svg>
+      <div className='preview-paragraph' style={{ height: '35%' }}>
+        {sentence}
+      </div>
     </Player>
   );
 };
