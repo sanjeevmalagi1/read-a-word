@@ -21,9 +21,10 @@ const StateWordPlayer = props => {
   });
 
   const [ current, send ] = useMachine(dynamicPlayerStateMachine);
-  const { speed, word, index, words } = current.context
+  const { speed, index, words } = current.context
   const numberOfWords = words.length;
   const currentState = current.value;
+  const word = words[index];
 
   const isPlaying = current.matches(states.PLAYING);
 
@@ -52,7 +53,7 @@ const StateWordPlayer = props => {
 
   }, [speed]);
 
-  const percentage =  (index / numberOfWords ) * 100;
+  const percentage =  ((index+1) / numberOfWords ) * 100;
 
   return (
    <Player
@@ -64,14 +65,22 @@ const StateWordPlayer = props => {
       onPlay={() => send(events.PLAY) }
       onReplay={() => send(events.RESTART) }
       onPause={() => send(events.PAUSE) }
-      onScroll={value => send(events.SCROLL_BACK, { value }) }
+      onScroll={value => send(events.SCROLL_BACK, { value: value-1 }) }
       onSpeedScroll={ value => send(events.CHANGE_SPEED, { value }) }
     >
       <svg width="100%" height="50%">
         <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
       </svg>
-      <div className='preview-paragraph' style={{ height: '35%' }}>
-        {sentence}
+      <div className='preview-paragraph'>
+        {
+          words.map((word, sentenceIndex) => {
+            const displayWord = `${word} `
+            if(sentenceIndex == index) {
+              return <span className='highlight'>{ displayWord }</span>
+            }
+            return displayWord;
+          })
+        }
       </div>
     </Player>
   );

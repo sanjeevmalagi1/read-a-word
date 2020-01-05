@@ -34,7 +34,7 @@ const guards = {
       words,
     } = context;
     const len = words.length;
-    return index == len;
+    return index+1 == len;
   },
 };
 
@@ -52,7 +52,6 @@ const actions = {
     } = context;
 
     return {
-      word: words[index],
       index: index+1
     }
   }),
