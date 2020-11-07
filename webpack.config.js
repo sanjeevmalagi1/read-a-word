@@ -30,7 +30,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, '')
+    path: path.resolve(__dirname, 'docs')
   },
   plugins: [
     new CleanWebpackPlugin(),
