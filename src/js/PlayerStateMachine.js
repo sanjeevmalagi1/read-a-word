@@ -2,6 +2,7 @@ import { Machine, assign } from 'xstate';
 
 const events = {
   CHANGE_SPEED: 'CHANGE_SPEED',
+  CHANGE_TEXT: 'CHANGE_TEXT',
   SCROLL_BACK: 'SCROLL_BACK',
   PAUSE: 'PAUSE',
   RESTART: 'RESTART',
@@ -21,6 +22,7 @@ const actionNames = {
   SHOW_WORD: "showWord",
   CHANGE_SPEED: "changeSpeed",
   SCROLL_TO_WORD: "scrollToWord",
+  CHANGE_TEXT: 'changeText',
 };
 
 const guardNames = {
@@ -47,7 +49,6 @@ const actions = {
   }),
   [actionNames.SHOW_WORD]: assign((context, __event) => {
     const {
-      words,
       index
     } = context;
 
@@ -74,6 +75,10 @@ const actions = {
       index: reversPercentile,
     }
   }),
+  [actionNames.CHANGE_TEXT]: assign((__context, event) => {
+    const { words } = event;
+    return { words, index: 0 }
+  }),
 };
 
 const playerMachine = Machine({
@@ -90,6 +95,9 @@ const playerMachine = Machine({
       },
       [events.SCROLL_BACK]: {
         actions: [actionNames.SCROLL_TO_WORD],
+      },
+      [events.CHANGE_TEXT]: {
+        actions: [actionNames.CHANGE_TEXT],
       },
     },
     states: {

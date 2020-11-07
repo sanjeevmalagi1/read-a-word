@@ -9,23 +9,22 @@ import playerStateMachine, { events, states } from '../../PlayerStateMachine.js'
 let interval;
 
 const StateWordPlayer = props => {
-  const {
-    sentence,
-  } = props;
-
   let highlight = null;
 
+  const [ text, setText ] = useState('This is Sample text');
+  const tokenizedSentence = text.split(" ");
+  debugger;
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
-      words: sentence.split(" "),
+      words: tokenizedSentence,
       speed: Number(localStorage.getItem('speed')) || 0.5,
       currentWord: null,
       index: 0,
   });
 
   const [ scrollFollow, setScrollFollow ] = useState(true);
-
+  
   const [ current, send ] = useMachine(dynamicPlayerStateMachine);
-  const { speed, index, words } = current.context
+  const { speed, index, words } = current.context;
   const numberOfWords = words.length;
   const currentState = current.value;
   const word = words[index];
@@ -72,6 +71,12 @@ const StateWordPlayer = props => {
 
   const percentage =  ((index+1) / numberOfWords ) * 100;
 
+  const handleTextChange = (text) => {
+    const words = text.split(" ");
+    send(events.CHANGE_TEXT, { words });
+    setText(text);
+  };
+
   return (
    <Player
       speed={speed}
@@ -90,7 +95,7 @@ const StateWordPlayer = props => {
       <svg width="100%" height="50%">
         <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
       </svg>
-      <div className='preview-paragraph'>
+      {/* <div className='preview-paragraph'>
         {
           words.map((word, sentenceIndex) => {
             const displayWord = `${word} `
@@ -100,7 +105,13 @@ const StateWordPlayer = props => {
             return displayWord;
           })
         }
-      </div>
+      </div> */}
+      <textarea
+        className='preview-paragraph'
+        onChange={(e) => handleTextChange(e.target.value)}
+      >
+        {text}
+      </textarea>
     </Player>
   );
 };
