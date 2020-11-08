@@ -13,7 +13,6 @@ const StateWordPlayer = props => {
 
   const [ text, setText ] = useState('This is Sample text');
   const tokenizedSentence = text.split(" ");
-  debugger;
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: tokenizedSentence,
       speed: Number(localStorage.getItem('speed')) || 0.5,
@@ -77,6 +76,24 @@ const StateWordPlayer = props => {
     setText(text);
   };
 
+  const handleClearText = () => {
+    const words = ''.split(" ");
+    send(events.CHANGE_TEXT, { words });
+    setText('');
+  };
+
+  const handlePasteClipboard = () => {
+    navigator.clipboard.readText().then(text => {
+      if (!text) {
+        alert('Your clipboard is empty. Please copy some text');
+        return;
+      }
+      const words = text.split(" ");
+      send(events.CHANGE_TEXT, { words });
+      setText(text);
+    });
+  };
+
   return (
    <Player
       speed={speed}
@@ -95,23 +112,24 @@ const StateWordPlayer = props => {
       <svg width="100%" height="50%">
         <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
       </svg>
-      {/* <div className='preview-paragraph'>
-        {
-          words.map((word, sentenceIndex) => {
-            const displayWord = `${word} `
-            if(sentenceIndex == index) {
-              return <span className='highlight' ref={ item => highlight = item } >{ displayWord }</span>
-            }
-            return displayWord;
-          })
-        }
-      </div> */}
-      <textarea
-        className='preview-paragraph'
-        onChange={(e) => handleTextChange(e.target.value)}
-      >
-        {text}
-      </textarea>
+      <div className='preview-paragraph-container'>
+        <textarea
+          className='preview-paragraph'
+          onChange={(e) => handleTextChange(e.target.value)}
+          value={text}
+        ></textarea>
+        <div className='text-controls'>
+          <button onClick={() => handleClearText() } className='text-control-btn'>
+            <i className="material-icons">clear</i>
+            Clear
+          </button>
+          <button onClick={() => handlePasteClipboard()} className='text-control-btn'>
+            <i className="material-icons">content_paste</i>
+            Paste
+          </button>
+        </div>
+      </div>
+      
     </Player>
   );
 };

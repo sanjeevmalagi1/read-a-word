@@ -99,11 +99,17 @@
       text-align: center;
     }
 
-    .preview-paragraph {
-      font-family: 'Lexend Deca', sans-serif;
+    .preview-paragraph-container {
       border: 1px solid lightgrey;
       height: calc(35% - 30px);
-      width: calc(100% - 60px);
+      margin: auto 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-paragraph {
+      font-family: 'Lexend Deca', sans-serif;
+      border: none;
       background: black;
       color: white;
       padding: 15px;
@@ -111,6 +117,7 @@
       text-align: initial;
       scroll-behavior: smooth;
       resize: none;
+      height: 100%;
     }
 
     .preview-paragraph::-webkit-scrollbar {
@@ -123,6 +130,20 @@
 
     .preview-paragraph .highlight {
       color: red;
+    }
+
+    .text-controls {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .text-control-btn {
+      flex: 0;
+      display: flex;
+      align-items: center;
+      background: black;
+      color: white;
+      padding: 5px 25px;
     }
 
     .bottom-menu {
