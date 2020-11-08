@@ -11,7 +11,7 @@ let interval;
 const StateWordPlayer = props => {
   let highlight = null;
 
-  const [ text, setText ] = useState('This is Sample text');
+  const [ text, setText ] = useState('Press play button to play the text one word at a time. This will greatly increase the reading speed. You can also copy and paste your own text to here.');
   const tokenizedSentence = text.split(" ");
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: tokenizedSentence,

@@ -24,7 +24,8 @@
 
     .navigation {
       display: flex;
-      height: 7vh;
+      box-sizing: border-box;
+      height: 50px;
       border-bottom: 1px solid white;
       align-items: center;
     }
@@ -53,7 +54,7 @@
       display: flex;
       text-align: center;
       font-size: 3rem;
-      height: 93vh;
+      height: calc( 100% - 51px);
     }
 
     .paste-screen-content {
@@ -92,7 +93,7 @@
 
     .player {
       width: 100%;
-      height: calc(93vh - 1px);
+      height: calc( 100% - 50px);
       background: black;
       position: absolute;
       bottom: 0;
@@ -101,7 +102,7 @@
 
     .preview-paragraph-container {
       border: 1px solid lightgrey;
-      height: calc(35% - 30px);
+      height: calc(50% - 100px);
       margin: auto 15px;
       display: flex;
       flex-direction: column;
@@ -149,9 +150,14 @@
     .bottom-menu {
       position: absolute;
       bottom: 0;
-      width: calc(100% - 30px);
-      left: 15px;
-      height: 10%;
+      width: 100%;
+      height: 75px;
+    }
+
+    .bottom-menu-container {
+      position: relative;
+      height: 100%;
+      margin: auto 15px;
     }
 
     .slider {
@@ -199,7 +205,7 @@
     }
 
     .controls {
-      height: calc(100% - 7px);
+      height: calc(100% - 10px);
       width: 100%;
       position: absolute;
       bottom: 0;
@@ -211,6 +217,8 @@
     .menu-item {
       display: flex;
       cursor: pointer;
+      height: 100%;
+      align-items: center;
       color: rgba(255, 255, 255, .9);
     }
 
@@ -220,7 +228,11 @@
     }
 
     .menu-icon {
-      padding: 15px;
+      width: 65px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;  
       transition: .3s;
     }
 

@@ -24,25 +24,25 @@ const Player = (props) => {
     <div id="player" className="player">
       {children}
       <div className="bottom-menu">
-        <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider">
-        </input>
-        <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
-        <div className="controls">
-          <div className='menu-item'>
-            <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
-          </div>
-          <div className='menu-item'>
-            { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
-          </div>
-          <div className='menu-item'>
-            { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
-          </div>
-          <div className='menu-item'>
-            { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
-          </div>
-          <div className='menu-item'>
-            <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range" className='speed-slider'>
-            </input>
+        <div className="bottom-menu-container">
+          <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider" />
+          <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
+          <div className="controls">
+            <div className='menu-item'>
+              <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
+            </div>
+            <div className='menu-item'>
+              { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
+            </div>
+            <div className='menu-item'>
+              { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
+            </div>
+            <div className='menu-item'>
+              { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
+            </div>
+            <div className='menu-item'>
+              <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range" className='speed-slider' />
+            </div>
           </div>
         </div>
       </div>      
