@@ -66,13 +66,9 @@ const actions = {
       words,
     } = context;
     const eventValue = event.value;
-
-    if(!eventValue) return;
-    
-    const reversPercentile = Math.round((eventValue / 100) * words.length);
     return {
-      word: words[reversPercentile],
-      index: reversPercentile,
+      word: words[eventValue],
+      index: eventValue,
     }
   }),
   [actionNames.CHANGE_TEXT]: assign((__context, event) => {

@@ -9,10 +9,39 @@
       href="https://raw.githubusercontent.com/sanjeevmalagi1/read-assistant/master/src/icon.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Lexend+Deca&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --main-font: 'Lexend Deca', sans-serif;
+
+      --primary-background: black;
+      --primary-text-color: white;
+      --border-color: white;
+      --heighlight-color: red;
+
+      --btn-color: white;
+      --btn-active-color: rgba(255,255,255,0.3);
+      --btn-hover-color: rgba(255,255,255,0.1);
+    }
+    
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    input, textarea {
+      border: none;
+      background-image: none;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      outline: none;
+    }
+
     html {
-      font-family: 'Lexend Deca', sans-serif;
-      background: black;
-      color: white;
+      font-family: var(--main-font);
+      background: var(--primary-background);
+      color: var(--primary-text-color);
       padding: 0px;
       margin: 0px;
     }
@@ -26,7 +55,7 @@
       display: flex;
       box-sizing: border-box;
       height: 50px;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid var(--border-color);
       align-items: center;
       padding-right: 15px;
       padding-left: 15px;
@@ -40,74 +69,31 @@
       text-align: right;
     }
 
-    .navigation .navbar-back {
-      background: inherit;
-      border: none;
-      cursor: pointer;
-      color: white;
-    }
-
-    .navigation .navbar-back[data-screen="paste"] {
-      visibility: hidden;
-    }
-
     .navigation .navbar-logo {
       text-align: center;
       flex: auto;
     }
 
-    .paste-screen {
+    .word-container {
       display: flex;
-      text-align: center;
-      font-size: 3rem;
-      height: calc( 100% - 51px);
-    }
-
-    .paste-screen-content {
-      margin: auto;
-    }
-  
-    .paste-button {
-      border-radius: 50px;
-      border: 1px solid white;
-      background: black;
-      color: white;
-    }
-
-    .paste-button i {
-      padding: 10px 30px;
-    }
-
-    .paste-button:hover {
-      cursor: pointer;
-      background: white;
-      color: black;
-    }
-
-    .paste-button:hover i {
-      color: black; 
-    }
-
-    #main-word {
-        text-transform: uppercase;
-        font-family: 'Lexend Deca', sans-serif;
-    }
-
-    .heighlight {
-      background-color: yellow;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      font-family: var(--main-font);
+      font-size: 15vw;
+      height: 50%;
     }
 
     .player {
       width: 100%;
       height: calc( 100% - 50px);
-      background: black;
       position: absolute;
       bottom: 0;
       text-align: center;
     }
 
     .preview-paragraph-container {
-      border: 1px solid lightgrey;
+      border: 1px solid var(--border-color);
       height: calc(50% - 100px);
       margin: auto 15px;
       display: flex;
@@ -115,13 +101,12 @@
     }
 
     .preview-paragraph {
-      font-family: 'Lexend Deca', sans-serif;
+      font-family: var(--main-font);
       border: none;
-      background: black;
-      color: white;
+      background: var(--primary-background);
+      color: var(--primary-text-color);
       padding: 15px;
       overflow-y: scroll;
-      text-align: initial;
       scroll-behavior: smooth;
       resize: none;
       height: 100%;
@@ -132,11 +117,11 @@
     }
 
     .preview-paragraph::-webkit-scrollbar-thumb {
-      background: red;
+      background: var(--heighlight-color);
     }
 
     .preview-paragraph .highlight {
-      color: red;
+      color: var(--heighlight-color);
     }
 
     .text-controls {
@@ -148,8 +133,8 @@
       flex: 0;
       display: flex;
       align-items: center;
-      background: black;
-      color: white;
+      background: inherit;
+      color: var(--primary-text-color);
       padding: 5px 25px;
     }
 
@@ -176,25 +161,33 @@
 
     input[type="range"] {
       -webkit-appearance: none;
-      background: rgba(255, 255, 255, 0.6);
+      background: var(--border-color); /*rgba(255, 255, 255, 0.6);*/
       cursor: pointer;
       height: 3px;
     }
 
-    input[type="range"]::-webkit-slider-thumb {
+    .slider::-webkit-slider-thumb {
+      visibility: hidden;
+    }
+
+    .slider::-moz-range-thumb {
+      visibility: hidden;
+    }
+
+    .speed-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 10px;
       height: 10px;
-      background: red;
+      background: var(--heighlight-color);
       cursor: pointer;
       border-radius: 50%;
     }
 
-    input[type="range"]::-moz-range-thumb {
+    .speed-slider::-moz-range-thumb {
       width: 10px;
       height: 10px;
-      background: red;
+      background: var(--heighlight-color);
       cursor: pointer;
       border-radius: 50%;
     }
@@ -204,14 +197,25 @@
       top: 0;
       width: 26%;
       height: 3px;
-      background: red;
+      background: var(--heighlight-color);
       margin: 2px;
       margin-right: 0px;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .filler::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: var(--heighlight-color);
+      border-radius: 50%;
     }
 
     .controls {
-      height: calc(100% - 10px);
+      height: calc(100% - 15px);
       width: 100%;
       position: absolute;
       bottom: 0;
@@ -225,12 +229,11 @@
       cursor: pointer;
       height: 100%;
       align-items: center;
-      color: rgba(255, 255, 255, .9);
+      color: var(--btn-color);
     }
 
     .menu-item:hover {
-      color: rgba(255, 255, 255, 1);
-      background: rgba(255,255,255,0.1);
+      background: var(--btn-hover-color);
     }
 
     .menu-icon {
@@ -243,8 +246,8 @@
     }
 
     .menu-icon[data-active="true"] {
-      color: rgba(255, 255, 255, 1);
-      background: rgba(255,255,255,0.3);
+      color: var(--btn-color);
+      background: var(--btn-active-color);
     }
 
   </style>

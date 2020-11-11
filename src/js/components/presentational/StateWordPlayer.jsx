@@ -94,8 +94,14 @@ const StateWordPlayer = props => {
     });
   };
 
+  const handleScrollChange = value => {
+    send(events.SCROLL_BACK, { value: value });
+  };
+
   return (
    <Player
+      currentWord={index}
+      numberOfWords={numberOfWords}
       speed={speed}
       completedPercentage={ percentage }
       showPlaying={current.nextEvents.includes(events.PLAY)}
@@ -105,13 +111,13 @@ const StateWordPlayer = props => {
       onPlay={() => send(events.PLAY) }
       onReplay={() => send(events.RESTART) }
       onPause={() => send(events.PAUSE) }
-      onScroll={value => send(events.SCROLL_BACK, { value: value-1 }) }
+      onScroll={handleScrollChange}
       onSpeedScroll={ value => send(events.CHANGE_SPEED, { value }) }
       onScrollFollow={() => setScrollFollow(!scrollFollow) }
     >
-      <svg width="100%" height="50%">
-        <text id='main-word' x="50%" y="50%" textAnchor="middle" fontSize='10vw' fill="white">{word}</text>
-      </svg>
+      <div className="word-container">
+        {word}
+      </div>
       <div className='preview-paragraph-container'>
         <textarea
           className='preview-paragraph'

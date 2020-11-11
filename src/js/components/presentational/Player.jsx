@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 const Player = (props) => {
   const {
     children,
+    currentWord,
+    numberOfWords,
     speed,
-    completedPercentage,
     showPlaying,
     showPaused,
     showReplay,
@@ -19,14 +20,15 @@ const Player = (props) => {
     onScrollFollow,
   } = props;
 
-  const displayPercentage = completedPercentage.toFixed(4);
+  const percentage =  ((currentWord+1) / numberOfWords ) * 100;
+
   return (
     <div id="player" className="player">
       {children}
       <div className="bottom-menu">
         <div className="bottom-menu-container">
-          <input value={displayPercentage} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min="0" max="100" className="slider" />
-          <div className='filler' style={{ width: `${displayPercentage}%` }}></div>
+          <input value={currentWord} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min={0} max={numberOfWords-1} className="slider" />
+          <div className='filler' style={{ width: `calc(${percentage}% + 5px)`, transition: `width ${(1 - speed)}s linear 0s ` }}></div>
           <div className="controls">
             <div className='menu-item'>
               <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
@@ -52,8 +54,9 @@ const Player = (props) => {
 
 Player.propTypes = {
   children: PropTypes.object.isRequired,
+  currentWord: PropTypes.number.isRequired,
+  numberOfWords: PropTypes.number.isRequired,
   speed: PropTypes.number.isRequired,
-  completedPercentage: PropTypes.number.isRequired,
   showPlaying: PropTypes.bool.isRequired,
   showPaused: PropTypes.bool.isRequired,
   showReplay: PropTypes.bool.isRequired,
