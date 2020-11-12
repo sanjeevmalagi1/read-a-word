@@ -28,7 +28,9 @@ const Player = (props) => {
       <div className="bottom-menu">
         <div className="bottom-menu-container">
           <input value={currentWord} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min={0} max={numberOfWords-1} className="slider" />
-          <div className='filler' style={{ width: `calc(${percentage}% + 5px)`, transition: `width ${(1 - speed)}s linear 0s ` }}></div>
+          <div className='filler-container' style={{ width: '100%' }}>
+            <div className='filler' style={{ width: `calc(${percentage}% + 5px)`, transition: `width ${(1 - speed)}s linear 0s ` }}></div>
+          </div>
           <div className="controls">
             <div className='menu-item'>
               <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
