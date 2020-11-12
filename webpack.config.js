@@ -33,7 +33,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
+      filename: "./index.html",
+      favicon: './src/icon.png'
     }),
     new WebpackPwaManifest({
       name: 'Read A Word',
