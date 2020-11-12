@@ -1,6 +1,6 @@
 {
-  "name": "read-assistant",
-  "description": "Improve your reading one word at a time!",
+  "name": "read-a-word",
+  "description": "Increase your reading speed by reading only one word at a time!",
   "version": "1.0.0",
   "author": "@sanjeevmalagi1",
   "scripts": {

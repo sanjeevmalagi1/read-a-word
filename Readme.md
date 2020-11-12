@@ -1,9 +1,10 @@
-# Read-Assistant
+# Read-A-Word
 
-![Read Assistant](src/icon.png)
+![Read A Word](src/icon.png)
 
-This is a hobby project I am developing to display each word of a given sentence to increase the efficiency of reading.
+This app allows you to read a single word of a sentence at a time.
+This will increase your reading speed significantly.
 
-Available on [https://sanjeevmalagi1.github.io/read-assistant/](https://sanjeevmalagi1.github.io/read-assistant/).
+Available on [https://sanjeevmalagi1.github.io/read-a-word/](https://sanjeevmalagi1.github.io/read-a-word/).
 
 xstate visualization available on https://xstate.js.org/viz/?gist=33346eae18ec3f246f648592db5d6e9a

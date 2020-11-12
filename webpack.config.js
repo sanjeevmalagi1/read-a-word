@@ -36,9 +36,9 @@ module.exports = {
       filename: "./index.html"
     }),
     new WebpackPwaManifest({
-      name: 'Read Assistant',
-      short_name: 'Read Assistant',
-      description: 'Improve your reading one word at a time!',
+      name: 'Read A Word',
+      short_name: 'Read A Word',
+      description: 'Increase your reading speed by reading only one word at a time!',
       background_color: '#000000',
       theme_color: '#000000',
       icons: [
