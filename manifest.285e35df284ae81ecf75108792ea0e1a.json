@@ -1,0 +1,17 @@
+{
+  "icons": [
+    {
+      "src": "icon_512x512.eaea823245b38591370ca7debe8a7b67.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "name": "Read A Word",
+  "short_name": "Read A Word",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "Increase your reading speed by reading only one word at a time!",
+  "background_color": "#000000",
+  "theme_color": "#000000"
+}
