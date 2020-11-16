@@ -2,6 +2,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Slider from './Slider.jsx';
+
 const Player = (props) => {
   const {
     children,
@@ -20,32 +22,47 @@ const Player = (props) => {
     onScrollFollow,
   } = props;
 
-  const percentage =  ((currentWord+1) / numberOfWords ) * 100;
-
+  const transitionSpeed = ((1 / speed) * 60);  
+        
   return (
     <div id="player" className="player">
       {children}
       <div className="bottom-menu">
         <div className="bottom-menu-container">
-          <input value={currentWord} onChange={e => onScroll(parseFloat(e.target.value)) } type="range" min={0} max={numberOfWords-1} className="slider" />
-          <div className='filler-container' style={{ width: '100%' }}>
-            <div className='filler' style={{ width: `calc(${percentage}% + 5px)`, transition: `width ${(1 - speed)}s linear 0s ` }}></div>
-          </div>
+          <Slider
+            currentValue={currentWord}
+            minValue={0}
+            maxValue={numberOfWords-1}
+            transitionSpeed={transitionSpeed}
+            onChange={newValue => onScroll(newValue)}
+          />
+
           <div className="controls">
-            <div className='menu-item'>
+            {/* <div className='menu-item'>
               <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
-            </div>
+            </div> */}
             <div className='menu-item'>
               { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
-            </div>
-            <div className='menu-item'>
-              { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
             </div>
             <div className='menu-item'>
               { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
             </div>
             <div className='menu-item'>
-              <input value={speed * 100} onChange={e => onSpeedScroll((e.target.value)/100) } type="range" className='speed-slider' />
+              { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
+            </div>
+            <div className='menu-item' style={{ width: 200 }}>
+              <div style={{ width: 100 }}>
+                <Slider
+                  currentValue={speed}
+                  minValue={50}
+                  maxValue={900}
+                  transitionSpeed={0}
+                  onChange={newValue => onSpeedScroll(newValue)}
+                />
+              </div>
+              <div style={{ marginLeft: 5 }}>
+                {speed} wpm
+              </div>
             </div>
           </div>
         </div>

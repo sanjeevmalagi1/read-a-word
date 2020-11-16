@@ -34,10 +34,11 @@ const StateWordPlayer = props => {
 
   useEffect(() => {
     if(isPlaying) {
-      clearInterval(interval); 
+      clearInterval(interval);
+      const intervalTime = ((1 / speed) * 60) * 1000;
       interval = setInterval( () => {
         send(events.SHOW_WORD);
-      }, (1 - speed) * 1000 );
+      }, intervalTime );
     }
   }, [speed, currentState]);
 
@@ -95,7 +96,7 @@ const StateWordPlayer = props => {
   };
 
   const handleScrollChange = value => {
-    send(events.SCROLL_BACK, { value: value });
+    send(events.SCROLL_BACK, { value: parseInt(value) });
   };
 
   return (

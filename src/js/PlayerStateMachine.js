@@ -26,17 +26,24 @@ const actionNames = {
 };
 
 const guardNames = {
-  HAS_FINISHED: "hasFinished"
+  HAS_FINISHED: "hasFinished",
+  HAS_WORD_SCROLL_FINISHED: "hasScrollFinished",
 };
 
 const guards = {
+  [guardNames.HAS_WORD_SCROLL_FINISHED]: (context, event) => {
+    const { words } = context;
+    const eventValue = event.value;
+    const len = words.length;
+    return eventValue+1 >= len;
+  },
   [guardNames.HAS_FINISHED]:  (context, event) => {
     const {
       index,
       words,
     } = context;
     const len = words.length;
-    return index+1 == len;
+    return index+1 >= len;
   },
 };
 
@@ -89,9 +96,16 @@ const playerMachine = Machine({
       [events.CHANGE_SPEED]: {
         actions: [actionNames.CHANGE_SPEED],
       },
-      [events.SCROLL_BACK]: {
-        actions: [actionNames.SCROLL_TO_WORD],
-      },
+      [events.SCROLL_BACK]: [
+        {
+          cond: { type: [guardNames.HAS_WORD_SCROLL_FINISHED] } ,
+          target: states.FINISHED,
+          actions: [actionNames.SCROLL_TO_WORD],
+        },
+        {
+          actions: [actionNames.SCROLL_TO_WORD],
+        }
+      ],
       [events.CHANGE_TEXT]: {
         actions: [actionNames.CHANGE_TEXT],
       },
@@ -106,7 +120,7 @@ const playerMachine = Machine({
       playing: {
         on: {
           [events.PAUSE]: states.PAUSED,
-          [events.RESTART]: states.IDLE,
+          // [events.RESTART]: states.IDLE,
           [events.SHOW_WORD]: [
             {
               cond: { type: [guardNames.HAS_FINISHED] } ,
@@ -122,7 +136,7 @@ const playerMachine = Machine({
       paused: {
         on: {
           [events.PLAY]: states.PLAYING,
-          [events.RESTART]: states.IDLE, 
+          // [events.RESTART]: states.IDLE,
         }
       },
       finished: {
