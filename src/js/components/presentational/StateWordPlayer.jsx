@@ -15,7 +15,7 @@ const StateWordPlayer = props => {
   const tokenizedSentence = text.match(/.*?[\.\s]+?/g);
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: tokenizedSentence,
-      speed: Number(localStorage.getItem('speed')) || 0.5,
+      speed: Number(localStorage.getItem('speed')) || 250,
       currentWord: null,
       index: 0,
   });
