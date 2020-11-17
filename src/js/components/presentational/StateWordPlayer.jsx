@@ -143,7 +143,6 @@ const StateWordPlayer = props => {
 
 
 StateWordPlayer.propTypes = {
-  sentence: PropTypes.string.isRequired
 };
 
 export default StateWordPlayer;

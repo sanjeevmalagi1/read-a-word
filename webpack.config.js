@@ -27,6 +27,14 @@ module.exports = {
             loader: 'style-loader',
         }
       },
+      {
+        test: /\.(png|mov|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
   plugins: [

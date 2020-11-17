@@ -33,30 +33,37 @@ const Player = (props) => {
             currentValue={currentWord}
             minValue={0}
             maxValue={numberOfWords-1}
+            stepSize={1}
             transitionSpeed={transitionSpeed}
             onChange={newValue => onScroll(newValue)}
           />
 
           <div className="controls">
-            {/* <div className='menu-item'>
-              <i onClick={() => onScrollFollow() } data-active={scrollFollow} className="menu-icon material-icons">playlist_play</i>
-            </div> */}
-            <div className='menu-item'>
-              { showPaused && <i onClick={() => onPause() } className="menu-icon material-icons">pause</i> }
-            </div>
-            <div className='menu-item'>
-              { showReplay &&  <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>}
-            </div>
-            <div className='menu-item'>
-              { showPlaying && <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i> }
-            </div>
+            {
+              showPaused &&
+              <div className='menu-item border-1px'>
+                <i onClick={() => onPause() } className="menu-icon material-icons">pause</i>
+              </div>
+            }
+            {
+              showReplay &&
+              <div className='menu-item border-1px'>
+                <i onClick={() => onReplay() } className="menu-icon material-icons">replay</i>
+              </div>
+            }
+            {
+              showPlaying &&
+              <div className='menu-item border-1px'>
+                <i onClick={() => onPlay() } className="menu-icon material-icons">play_arrow</i>
+              </div>
+            }
             <div className='menu-item' style={{ width: 200 }}>
               <div style={{ width: 100 }}>
                 <Slider
                   currentValue={speed}
                   minValue={50}
                   maxValue={900}
-                  transitionSpeed={0}
+                  stepSize={10}
                   onChange={newValue => onSpeedScroll(newValue)}
                 />
               </div>
