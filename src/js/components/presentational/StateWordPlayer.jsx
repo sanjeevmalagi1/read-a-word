@@ -12,7 +12,7 @@ const StateWordPlayer = props => {
   let highlight = null;
 
   const [ text, setText ] = useState('Copy and paste the text you want to read into this text box. Press the play button below to display one word of that text at a time. This will increase your reading speed!');
-  const tokenizedSentence = text.match(/.*?[\.\s]+?/g);
+  const tokenizedSentence = text.split(" ");
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: tokenizedSentence,
       speed: Number(localStorage.getItem('speed')) || 250,
