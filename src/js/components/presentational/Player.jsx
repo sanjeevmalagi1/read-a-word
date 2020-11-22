@@ -7,19 +7,19 @@ import Slider from './Slider.jsx';
 const Player = (props) => {
   const {
     children,
-    currentWord,
+    currentWordIndex,
     numberOfWords,
     speed,
     showPlaying,
     showPaused,
     showReplay,
-    scrollFollow,
     onPlay,
     onReplay,
     onPause,
     onScroll,
     onSpeedScroll,
-    onScrollFollow,
+    // scrollFollow,
+    // onScrollFollow,
   } = props;
 
   const transitionSpeed = ((1 / speed) * 60);  
@@ -30,7 +30,7 @@ const Player = (props) => {
       <div className="bottom-menu">
         <div className="bottom-menu-container">
           <Slider
-            currentValue={currentWord}
+            currentValue={currentWordIndex}
             minValue={0}
             maxValue={numberOfWords-1}
             stepSize={1}
@@ -80,7 +80,7 @@ const Player = (props) => {
 
 Player.propTypes = {
   children: PropTypes.object.isRequired,
-  currentWord: PropTypes.number.isRequired,
+  currentWordIndex: PropTypes.number.isRequired,
   numberOfWords: PropTypes.number.isRequired,
   speed: PropTypes.number.isRequired,
   showPlaying: PropTypes.bool.isRequired,

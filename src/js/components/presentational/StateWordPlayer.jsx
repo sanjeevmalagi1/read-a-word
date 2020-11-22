@@ -16,7 +16,6 @@ const StateWordPlayer = props => {
   const dynamicPlayerStateMachine = playerStateMachine.withContext({
       words: tokenizedSentence,
       speed: Number(localStorage.getItem('speed')) || 250,
-      currentWord: null,
       index: 0,
   });
 
@@ -101,7 +100,7 @@ const StateWordPlayer = props => {
 
   return (
    <Player
-      currentWord={index}
+      currentWordIndex={index}
       numberOfWords={numberOfWords}
       speed={speed}
       completedPercentage={ percentage }

@@ -55,23 +55,14 @@ const actions = {
     }
   }),
   [actionNames.SHOW_WORD]: assign((context, __event) => {
-    const {
-      index
-    } = context;
-
-    return {
-      index: index+1
-    }
+    const nextIndex = context.index + 1;
+    return { index: nextIndex }
   }),
   [actionNames.CHANGE_SPEED]: assign((__context, event) => {
-    return {
-      speed: event.value,
-    }
+    return { speed: event.value }
   }),
   [actionNames.SCROLL_TO_WORD]: assign((context, event) => {
-    const {
-      words,
-    } = context;
+    const { words } = context;
     const eventValue = event.value;
     return {
       word: words[eventValue],
@@ -88,8 +79,7 @@ const playerMachine = Machine({
     id: 'player-machine',
     initial: states.IDLE,
     context: {
-      speed: 0.5,
-      currentWord: null,
+      speed: 250,
       index: 0,
     },
     on: {
